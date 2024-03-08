@@ -1,4 +1,4 @@
--- name: Print Success on Dev Folder Commit
+name: Print Success on Dev Folder Commit
 
 on:
   push:
@@ -6,8 +6,7 @@ on:
       - '*'  # Trigger on all branches
     paths:
       - 'Dev/**' # Trigger only on changes in the Dev folder
-
-- jobs:
+jobs:
   print_success:
     if: >
       github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Manual commit to Dev folder')
@@ -15,6 +14,7 @@ on:
     steps:
       - name: Print Success
         run: echo "Success"
+
 
 
 
