@@ -7,9 +7,12 @@ on:
 
 jobs:
   print_success:
-    if: github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Manual commit to Dev folder')
+    if: |
+      github.event_name == 'push' && 
+      startsWith(github.event.head_commit.message, 'Manual commit to Dev folder')
     runs-on: ubuntu-latest
     steps:
       - name: Print Success
         run: echo "Success"
+
 
