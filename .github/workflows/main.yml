@@ -1,12 +1,14 @@
-name: My Workflow
+name: Print Success on Dev Folder Commit
 
-on: 
+on:
   push:
     paths:
-      - 'DEV'
+      - 'Dev/**' # Trigger only on changes in the Dev folder
+
 jobs:
-  my_job:
+  print_success:
     runs-on: ubuntu-latest
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v2         
+    steps:
+      - name: Print Success
+        run: echo "Success"
+   
