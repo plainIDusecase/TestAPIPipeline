@@ -9,9 +9,13 @@ on:
 
 jobs:
   print_success:
-    if: >
-      github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Manual commit to Dev folder')
     runs-on: ubuntu-latest
     steps:
-      - name: Print Success
+      - name: Check Commit Message
+        if: >
+          github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Manual commit to Dev folder')
         run: echo "Success"
+      - name: Print Failure
+        if: >
+          github.event_name == 'push' && !startsWith(github.event.head_commit.message, 'Manual commit to Dev folder')
+        run: echo "Failure: Commit message does not indicate a manual commit to Dev folder"
