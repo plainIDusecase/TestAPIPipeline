@@ -1,23 +1,4 @@
 name: Print Success on Dev Folder Commit
 
-on:
-  push:
-    branches:
-      - '*'  # Trigger on all branches
-    paths:
-      - 'Dev/**' # Trigger only on changes in the Dev folder
-
-jobs:
-  print_success:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check Commit Message
-        if: >
-          github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Manual commit to Dev folder')
-        run: echo "Success"
-      - name: Print Failure
-        if: >
-          github.event_name == 'push' && !startsWith(github.event.head_commit.message, 'Manual commit to Dev folder')
-        run: echo "Failure Commit message does not indicate a manual commit to Dev folder"
-
-
+on: push
+   
