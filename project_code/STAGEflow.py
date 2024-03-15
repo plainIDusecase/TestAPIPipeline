@@ -4,7 +4,7 @@ from token_function import get_token
 from export_function import get_policy
 from validate_function import check_pass
 from import_function import check_completion
-from DEVflow.py import get_policy_code
+from DEVflow import get_policy_code
 
 clientId = "POOGAATPV9DWOHZDYGMT"
 clientSecret =  "tasoUG8Ls2b3P8n17Yzh9V4PHmd97DyZ"
