@@ -3,10 +3,12 @@ on:
   push:
     branches:
       - DEV
+      - STAGE
 
 jobs:
   save-output:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/DEV' && github.event_name == 'push' # Trigger only when pushing to DEV
 
     steps:
       - name: Check out repository code
@@ -15,10 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install requests
-      - name: Check out master branch
-        uses: actions/checkout@v4
-        with:
-          ref: 'master'
+      
       - name: Run DEVflow script
         run: |
           python3 project_code/DEVflow.py > DEVout.txt
@@ -30,12 +29,13 @@ jobs:
           name: DEV-output
           path: DEVout.txt
 
-      - name: Check out master branch
-        uses: actions/checkout@v4
-        with:
-          ref: 'STAGE'
+  process-artifact:
+    runs-on: ubuntu-latest
+    needs: save-output
+    if: github.ref == 'refs/heads/STAGE' && github.event_name == 'push' # Trigger only when pushing to STAGE
 
-            # Checkout the repository code
+    steps:
+      # Checkout the repository code
       - name: Check out repository code
         uses: actions/checkout@v4
       
@@ -45,6 +45,10 @@ jobs:
         with:
           name: DEV-output
           path: output
+
+      # Print the contents of the output file
+      - name: Print Output
+        run: cat output/DEVout.txt
 
       # Print the contents of the output file
       - name: Print Output
