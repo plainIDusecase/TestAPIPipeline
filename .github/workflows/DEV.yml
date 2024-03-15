@@ -53,3 +53,8 @@ jobs:
         if: github.ref == 'refs/heads/STAGE' && github.event_name == 'push'
         run: cat output/DEVout.txt
 
+
+      - name: Run DEVflow script
+        run: |
+          python3 project_code/STAGEflow.py > STAGEout.txt
+
