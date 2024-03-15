@@ -15,4 +15,4 @@ jobs:
         with:
           ref: 'master'
       - run: pip install requests
-      - run: python3 project_code/DEVFlow.py
+      - run: python3 project_code/DEVflow.py
