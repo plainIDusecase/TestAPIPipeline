@@ -36,8 +36,8 @@ jobs:
           git config --global user.name "GitHub Actions"
           git add policyCode.txt
           git commit -m "Add policyCode.txt"
-          git push https://${{ secrets.GH_TOKEN }}@github.com/plainIDusecase/TestAPIPipeline.git HEAD:master
-
+          git push
+          
       # Upload the output file as an artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
