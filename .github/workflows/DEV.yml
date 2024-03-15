@@ -24,7 +24,7 @@ jobs:
 
       - name: Run DEVflow script
         run: |
-          python3 project_code/DEVflow.py > DEVout.txt
+          python3 project_code/DEVflow.py 
 
       # Upload the output file as an artifact
       - name: Upload Artifact
@@ -55,5 +55,5 @@ jobs:
 
       - name: Run STAGEflow script
         run: |
-          python3 project_code/STAGEflow.py > STAGEout.txt
+          python3 project_code/STAGEflow.py 
 
