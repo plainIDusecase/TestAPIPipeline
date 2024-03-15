@@ -15,6 +15,7 @@ def get_policy_codes():
 
   env1Id = "81e1bbda-00cf-4092-8238-4a9bba540f6d"
   policyIds = do_audit(env1Id, BEARER_TOKEN)
+  print(policyIds)
   policy_codes = []
 
   for policy in policyIds:
