@@ -18,36 +18,23 @@ authWs2Id = "43419dfc-16b3-4b0d-8d7a-13a936ac02e8"
 approval = True
 
 policies = get_policy_code()
-
+correctCodes = []
+completePolicies = []
+movedPolicies = []
 for policyId, policyCode in policies:
   [passfail,completed]=check_pass(env1Id,BEARER_TOKEN,policyCode,authWs1Id)
   if passfail == [] and completed is True and approval is True:
-    isComplete = check_completion(env2Id, BEARER_TOKEN, policyId, authWs2Id)
+    correctCodes.append([policyId, policyCode])
+    isComplete = check_completion(env2Id, BEARER_TOKEN, policyCode, authWs2Id)
     if isComplete is True:
+        completePolicies.append([policyId, policyCode])
         policyCode = get_policy(env2Id,policyId,BEARER_TOKEN)
         env3Id = "c3895c00-9e78-4990-9342-4f296222a0a2"
         authWs3Id = "3c8017f4-fe6b-46ff-aff0-05014de21acc"
         #Validate the policy that was moved to STAGE
         [passfail,completed]=check_pass(env2Id,BEARER_TOKEN,policyCode,authWs2Id)
-
         approval = True
-        if passfail == [] and completed is True and approval is True:
-            print("Proceed")
-            #Put code here to import
-            isComplete = check_completion(env3Id, BEARER_TOKEN, policyCode, authWs3Id)
-            if isComplete is True:
-                print("Successfully moved the policy to PROD")
-                print("Move policy to PROD folder and push to GitHub")
-                file_path = f"GitPlace/PROD/policyCode"
-                #with open(file_path, "w") as outfile:
-                #    outfile.write(policyCode)
-                #push_to_github("GitPlace/PROD","policyCode","Pushed to PROD")
-
-            else:
-                print("Failed to shift policy to PROD. Raise Ticket")
-        else:
-            print("Failed to validate policy in STAGE. Raise Ticket")
-
     else:
-        print("Failed to move policy to STAGE. Raise Ticket")
-
+      print("Policy issue")
+  else:
+    print("Policy issue")
