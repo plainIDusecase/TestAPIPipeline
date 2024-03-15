@@ -22,6 +22,7 @@ jobs:
       - name: Run DEVflow script
         run: |
           python3 project_code/DEVflow.py > DEVout.txt
+
       # Upload the output file as an artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
@@ -48,8 +49,3 @@ jobs:
       # Print the contents of the output file
       - name: Print Output
         run: cat output/DEVout.txt
-
-      # Print the contents of the output file
-      - name: Print Output
-        run: cat output/DEVout.txt
-
