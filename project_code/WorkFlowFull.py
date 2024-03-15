@@ -12,7 +12,6 @@ BEARER_TOKEN = get_token(clientId,clientSecret)
 print(BEARER_TOKEN)
 
 
-#env1Id = "0a8d654f-7dfe-4cb0-939f-ca25d2845ded"
 env1Id = "81e1bbda-00cf-4092-8238-4a9bba540f6d"
 #policyId = "d2c89847-1c51-4a73-8366-b08f8aa900d9"
 policyId = "2397c3d8-87c4-4eb0-9e2e-501f19f3cb77"
