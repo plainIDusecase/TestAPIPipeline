@@ -7,6 +7,7 @@ def check_completion(env1Id, BEARER_TOKEN):
     params = {
         "filter[timestamp][gt]":1707800041000,
         "filter[resourceType][eq]": "ROLE"
+    }
     headers = {
         "Authorization": "Bearer " + BEARER_TOKEN,
         "accept": "application/json"
