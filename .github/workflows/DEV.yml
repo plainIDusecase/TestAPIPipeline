@@ -36,8 +36,13 @@ jobs:
           git config --global user.name "GitHub Actions"
           git add policyCode.txt
           git commit -m "Add policyCode.txt"
-          git push https://${{ secrets.GH_TOKEN }}@github.com/plainIDusecase/TestAPIPipeline.git HEAD:master
-
+          # Use SSH URL instead of HTTPS
+          git remote set-url origin git@github.com:plainIDusecase/TestAPIPipeline.git
+          # Configure SSH authentication
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          git push origin HEAD:master
 
       # Upload the output file as an artifact
       - name: Upload Artifact
