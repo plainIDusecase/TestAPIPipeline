@@ -1,7 +1,7 @@
 import requests
 import json
 
-def check_completion(env1Id, BEARER_TOKEN):
+def do_audit(env1Id, BEARER_TOKEN):
 
     url2 = f"https://api.eu1.plainid.io/api/1.0/audit-admin/{env1Id}"
     params = {
