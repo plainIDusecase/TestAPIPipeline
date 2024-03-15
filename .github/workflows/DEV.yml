@@ -1,24 +1,27 @@
 name: DEV actions
-#run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+# run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   push:
     branches:
       - DEV
 jobs:
-#  Explore-GitHub-Actions:
   save-output:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Check out other branch
+      - name: Check out master branch
         uses: actions/checkout@v4
         with:
           ref: 'master'
-      - run: pip install requests
-      - run: python3 project_code/DEVflow.py > DEVout.txt
+      - name: Install dependencies
+        run: |
+          pip install requests
+      - name: Run DEVflow script
+        run: |
+          python3 project_code/DEVflow.py > DEVout.txt
       - name: Upload Output File
-      - uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: DevOutput
           path: DEVout.txt
