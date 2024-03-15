@@ -4,7 +4,7 @@ from token_function import get_token
 from export_function import get_policy
 from validate_function import check_pass
 from import_function import check_completion
-from gitup import push_to_github
+#from gitup import push_to_github
 
 clientId = "POOGAATPV9DWOHZDYGMT"
 clientSecret =  "tasoUG8Ls2b3P8n17Yzh9V4PHmd97DyZ"
