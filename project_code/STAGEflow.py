@@ -29,12 +29,12 @@ for policyTuple in policies:
         isComplete = check_completion(env2Id, BEARER_TOKEN, policyCode, authWs2Id)
         if isComplete is True:
             completePolicies.append([policyId, policyCode])
-            policyCode = get_policy(env2Id, policyId, BEARER_TOKEN)
-            env3Id = "c3895c00-9e78-4990-9342-4f296222a0a2"
-            authWs3Id = "3c8017f4-fe6b-46ff-aff0-05014de21acc"
+            #policyCode = get_policy(env2Id, policyId, BEARER_TOKEN)
+            #env3Id = "c3895c00-9e78-4990-9342-4f296222a0a2"
+            #authWs3Id = "3c8017f4-fe6b-46ff-aff0-05014de21acc"
             # Validate the policy that was moved to STAGE
-            [passfail, completed] = check_pass(env2Id, BEARER_TOKEN, policyCode, authWs2Id)
-            approval = True
+            #[passfail, completed] = check_pass(env2Id, BEARER_TOKEN, policyCode, authWs2Id)
+            #approval = True
         else:
             print("Policy issue")
     else:
