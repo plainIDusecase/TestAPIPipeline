@@ -13,6 +13,11 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       
+      - name: Check out repository code
+        uses: actions/checkout@v2
+        with:
+          ref: 'master' # Checkout the master branch
+
       # Download the artifact containing the output file
       - name: Download Artifact
         uses: actions/download-artifact@v2
