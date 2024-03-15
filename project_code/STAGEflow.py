@@ -17,12 +17,12 @@ env2Id = "c3192543-bee5-40ee-87eb-3fd95853f22f"
 authWs2Id = "43419dfc-16b3-4b0d-8d7a-13a936ac02e8"
 approval = True
 
-policyCodes = get_policy_code()
+policies = get_policy_code()
 
-for policy in policyCodes:
-  [passfail,completed]=check_pass(env1Id,BEARER_TOKEN,policy,authWs1Id)
+for policyId, policyCode in policies:
+  [passfail,completed]=check_pass(env1Id,BEARER_TOKEN,policyCode,authWs1Id)
   if passfail == [] and completed is True and approval is True:
-    isComplete = check_completion(env2Id, BEARER_TOKEN, policy, authWs2Id)
+    isComplete = check_completion(env2Id, BEARER_TOKEN, policyId, authWs2Id)
     if isComplete is True:
         policyCode = get_policy(env2Id,policyId,BEARER_TOKEN)
         env3Id = "c3895c00-9e78-4990-9342-4f296222a0a2"
