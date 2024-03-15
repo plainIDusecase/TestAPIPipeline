@@ -20,8 +20,8 @@ policies = get_policy_codes()
 correctCodes = []
 completePolicies = []
 movedPolicies = []
-
-for policyId, policyCode in policies:
+for policyTuple in policies:
+    policyId, policyCode, *extra_values = policyTuple
     [passfail, completed] = check_pass(env1Id, BEARER_TOKEN, policyCode, authWs1Id)
     if passfail == [] and completed is True and approval is True:
         correctCodes.append([policyId, policyCode])
@@ -38,3 +38,4 @@ for policyId, policyCode in policies:
             print("Policy issue")
     else:
         print("Policy issue")
+
