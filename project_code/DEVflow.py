@@ -19,7 +19,7 @@ def get_policy_codes():
   policy_codes = []
 
   for policy in policyIds:
-    policyId = policy["resourceId"]
+    policyId = policy
     policyCode = get_policy(env1Id,policyId,BEARER_TOKEN)
     policy_codes.append(policyCode)
 
