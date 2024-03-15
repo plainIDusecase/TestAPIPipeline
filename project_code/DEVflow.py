@@ -23,7 +23,7 @@ def get_policy_codes():
     policyCode = get_policy(env1Id,policyId,BEARER_TOKEN)
     policy_codes.append(policyCode)
 
-  return policy_codes
+  return [policyIds,policy_codes]
   
 policy_codes_list = get_policy_codes()
 print(policy_codes_list)
