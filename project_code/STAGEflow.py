@@ -21,22 +21,31 @@ print(policies)
 correctCodes = []
 completePolicies = []
 movedPolicies = []
+policies = get_policy_codes()
+print(policies)
+correctCodes = []
+completePolicies = []
+movedPolicies = []
+
 for policyTuple in policies:
-    policyId, policyCode, *extra_values = policyTuple
-    [passfail, completed] = check_pass(env1Id, BEARER_TOKEN, policyCode, authWs1Id)
-    if passfail == [] and completed is True and approval is True:
-        correctCodes.append([policyId, policyCode])
-        isComplete = check_completion(env2Id, BEARER_TOKEN, policyCode, authWs2Id)
-        if isComplete is True:
-            completePolicies.append([policyId, policyCode])
-            policyCode = get_policy(env2Id, policyId, BEARER_TOKEN)
-            env3Id = "c3895c00-9e78-4990-9342-4f296222a0a2"
-            authWs3Id = "3c8017f4-fe6b-46ff-aff0-05014de21acc"
-            # Validate the policy that was moved to STAGE
-            [passfail, completed] = check_pass(env2Id, BEARER_TOKEN, policyCode, authWs2Id)
-            approval = True
+    try:
+        policyId, policyCode, *extra_values = policyTuple
+        [passfail, completed] = check_pass(env1Id, BEARER_TOKEN, policyCode, authWs1Id)
+        if passfail == [] and completed is True and approval is True:
+            correctCodes.append([policyId, policyCode])
+            isComplete = check_completion(env2Id, BEARER_TOKEN, policyCode, authWs2Id)
+            if isComplete is True:
+                completePolicies.append([policyId, policyCode])
+                policyCode = get_policy(env2Id, policyId, BEARER_TOKEN)
+                env3Id = "c3895c00-9e78-4990-9342-4f296222a0a2"
+                authWs3Id = "3c8017f4-fe6b-46ff-aff0-05014de21acc"
+                # Validate the policy that was moved to STAGE
+                [passfail, completed] = check_pass(env2Id, BEARER_TOKEN, policyCode, authWs2Id)
+                approval = True
+            else:
+                print("Policy issue")
         else:
             print("Policy issue")
-    else:
-        print("Policy issue")
+    except Exception as e:
+        print(f"Error processing policy: {e}")
 
