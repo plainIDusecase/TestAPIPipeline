@@ -15,7 +15,10 @@ jobs:
       - name: Install dependencies
         run: |
           pip install requests
-
+      - name: Check out master branch
+        uses: actions/checkout@v4
+        with:
+          ref: 'master'
       - name: Run DEVflow script
         run: |
           python3 project_code/DEVflow.py > DEVout.txt
