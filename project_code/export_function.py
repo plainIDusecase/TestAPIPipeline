@@ -15,7 +15,9 @@ def get_policy(env1Id,policyId,BEARER_TOKEN):
     params = {
         "language": "rego"
     }
-    response = requests.get(url, headers=headers, params = params, verify = False)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", category=requests.packages.urllib3.exceptions.InsecureRequestWarning)
+        response = requests.get(url, headers=headers, params=params, verify=False)
     print(response.json())
 
 
