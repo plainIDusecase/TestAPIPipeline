@@ -17,6 +17,7 @@ authWs2Id = "43419dfc-16b3-4b0d-8d7a-13a936ac02e8"
 approval = True
 
 policies = get_policy_codes()
+print(policies)
 correctCodes = []
 completePolicies = []
 movedPolicies = []
