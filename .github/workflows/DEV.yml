@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - DEV
+      - STAGE
 
 jobs:
   save-output:
@@ -15,10 +16,12 @@ jobs:
       - name: Install dependencies
         run: |
           pip install requests
+
       - name: Check out master branch
         uses: actions/checkout@v4
         with:
           ref: 'master'
+
       - name: Run DEVflow script
         run: |
           python3 project_code/DEVflow.py > DEVout.txt
@@ -30,22 +33,23 @@ jobs:
           name: DEV-output
           path: DEVout.txt
 
-      - name: Check out master branch
+      # Conditionally checkout STAGE branch only if pushed to STAGE
+      - name: Check out STAGE branch
+        if: github.ref == 'refs/heads/STAGE' && github.event_name == 'push'
         uses: actions/checkout@v4
         with:
           ref: 'STAGE'
 
-            # Checkout the repository code
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      
-      # Download the artifact containing the output file
+      # Download the artifact containing the output file if STAGE branch
       - name: Download Artifact
+        if: github.ref == 'refs/heads/STAGE' && github.event_name == 'push'
         uses: actions/download-artifact@v2
         with:
           name: DEV-output
           path: output
 
-      # Print the contents of the output file
+      # Print the contents of the output file if STAGE branch
       - name: Print Output
+        if: github.ref == 'refs/heads/STAGE' && github.event_name == 'push'
         run: cat output/DEVout.txt
+
