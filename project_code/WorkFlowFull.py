@@ -21,8 +21,8 @@ print(policyCode)
 
 print("Export policy from DEV. Move policy to DEV folder and push to Git")
 file_path = f"GitPlace/DEV/policyCode"
-with open(file_path, "w") as outfile:
-    outfile.write(policyCode)
+#with open(file_path, "w") as outfile:
+#    outfile.write(policyCode)
 #push_to_github("GitPlace/DEV","policyCode","Pushed to DEV")
 
 #authWs1Id = "2bb830cf-8382-493f-a8ae-90322c057ba4"
@@ -44,8 +44,8 @@ if passfail == [] and completed is True and approval is True:
         print("Move policy to STAGE folder and push to GitHub")
 
         file_path = f"GitPlace/STAGE/policyCode"
-        with open(file_path, "w") as outfile:
-            outfile.write(policyCode)
+        #with open(file_path, "w") as outfile:
+        #    outfile.write(policyCode)
         #push_to_github("GitPlace/STAGE","policyCode","Pushed to STAGE")
 
         #If STAGE passes approval, export from STAGE and move to PROD
@@ -64,8 +64,8 @@ if passfail == [] and completed is True and approval is True:
                 print("Successfully moved the policy to PROD")
                 print("Move policy to PROD folder and push to GitHub")
                 file_path = f"GitPlace/PROD/policyCode"
-                with open(file_path, "w") as outfile:
-                    outfile.write(policyCode)
+                #with open(file_path, "w") as outfile:
+                #    outfile.write(policyCode)
                 #push_to_github("GitPlace/PROD","policyCode","Pushed to PROD")
 
             else:
