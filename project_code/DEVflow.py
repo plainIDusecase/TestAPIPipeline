@@ -24,7 +24,6 @@ def get_policy_codes():
     policy_codes.append(policyCode)
 
   return policy_codes
-
-if __name__ == "__main__":
-  policy_codes_list = get_policy_codes()
-  print(policy_codes_list)
+  
+policy_codes_list = get_policy_codes()
+print(policy_codes_list)
