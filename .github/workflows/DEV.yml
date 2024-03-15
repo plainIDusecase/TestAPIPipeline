@@ -15,7 +15,10 @@ jobs:
       - name: Install dependencies
         run: |
           pip install requests
-      
+      - name: Check out master branch
+        uses: actions/checkout@v4
+        with:
+          ref: 'master'
       - name: Run DEVflow script
         run: |
           python3 project_code/DEVflow.py > DEVout.txt
@@ -27,10 +30,23 @@ jobs:
           name: DEV-output
           path: DEVout.txt
 
-      # Trigger the workflow in the STAGE branch
-      - name: Trigger STAGE branch workflow
-        uses: repo-sync/push-action@master
+      - name: Check out master branch
+        uses: actions/checkout@v4
         with:
-          ref: STAGE
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          ref: 'STAGE'
+
+            # Checkout the repository code
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      
+      # Download the artifact containing the output file
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: DEV-output
+          path: output
+
+      # Print the contents of the output file
+      - name: Print Output
+        run: cat output/DEVout.txt
 
