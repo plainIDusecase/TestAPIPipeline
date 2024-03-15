@@ -2,13 +2,17 @@ name: Process DEV Artifact
 on:
   push:
     branches:
-      - STAGE
+      - stage
 
 jobs:
   process-artifact:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the repository code
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      
       # Download the artifact containing the output file
       - name: Download Artifact
         uses: actions/download-artifact@v2
