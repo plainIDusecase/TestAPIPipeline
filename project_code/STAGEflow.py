@@ -17,7 +17,7 @@ env2Id = "c3192543-bee5-40ee-87eb-3fd95853f22f"
 authWs2Id = "43419dfc-16b3-4b0d-8d7a-13a936ac02e8"
 approval = True
 
-policies = get_policy_code()
+policies = get_policy_codes()
 correctCodes = []
 completePolicies = []
 movedPolicies = []
