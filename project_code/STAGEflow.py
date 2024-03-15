@@ -7,9 +7,8 @@ from import_function import check_completion
 from DEVflow import get_policy_codes
 
 clientId = "POOGAATPV9DWOHZDYGMT"
-clientSecret =  "tasoUG8Ls2b3P8n17Yzh9V4PHmd97DyZ"
-BEARER_TOKEN = get_token(clientId,clientSecret)
-
+clientSecret = "tasoUG8Ls2b3P8n17Yzh9V4PHmd97DyZ"
+BEARER_TOKEN = get_token(clientId, clientSecret)
 
 env1Id = "81e1bbda-00cf-4092-8238-4a9bba540f6d"
 authWs1Id = "db31e1a0-2746-4131-b719-bbb21297e483"
@@ -21,20 +20,21 @@ policies = get_policy_codes()
 correctCodes = []
 completePolicies = []
 movedPolicies = []
+
 for policyId, policyCode in policies:
-  [passfail,completed]=check_pass(env1Id,BEARER_TOKEN,policyCode,authWs1Id)
-  if passfail == [] and completed is True and approval is True:
-    correctCodes.append([policyId, policyCode])
-    isComplete = check_completion(env2Id, BEARER_TOKEN, policyCode, authWs2Id)
-    if isComplete is True:
-        completePolicies.append([policyId, policyCode])
-        policyCode = get_policy(env2Id,policyId,BEARER_TOKEN)
-        env3Id = "c3895c00-9e78-4990-9342-4f296222a0a2"
-        authWs3Id = "3c8017f4-fe6b-46ff-aff0-05014de21acc"
-        #Validate the policy that was moved to STAGE
-        [passfail,completed]=check_pass(env2Id,BEARER_TOKEN,policyCode,authWs2Id)
-        approval = True
+    [passfail, completed] = check_pass(env1Id, BEARER_TOKEN, policyCode, authWs1Id)
+    if passfail == [] and completed is True and approval is True:
+        correctCodes.append([policyId, policyCode])
+        isComplete = check_completion(env2Id, BEARER_TOKEN, policyCode, authWs2Id)
+        if isComplete is True:
+            completePolicies.append([policyId, policyCode])
+            policyCode = get_policy(env2Id, policyId, BEARER_TOKEN)
+            env3Id = "c3895c00-9e78-4990-9342-4f296222a0a2"
+            authWs3Id = "3c8017f4-fe6b-46ff-aff0-05014de21acc"
+            # Validate the policy that was moved to STAGE
+            [passfail, completed] = check_pass(env2Id, BEARER_TOKEN, policyCode, authWs2Id)
+            approval = True
+        else:
+            print("Policy issue")
     else:
-      print("Policy issue")
-  else:
-    print("Policy issue")
+        print("Policy issue")
