@@ -20,8 +20,17 @@ jobs:
       - name: Run DEVflow script
         run: |
           python3 project_code/DEVflow.py > DEVout.txt
-      - name: Upload Output File
-        uses: actions/upload-artifact@v4
+          
+      # Commit the changes
+      - name: Commit Changes
+        run: |
+          git config --global user.email "grace.poole@wipro.com"
+          git config --global user.name "plainIDusecase"
+          git add .
+          git commit -m "Output"
+      
+      # Push the changes back to the repository
+      - name: Push Changes
+        uses: ad-m/github-push-action@master
         with:
-          name: DevOutput
-          path: DEVout.txt
+          github_token: ${{ secrets.GITHUB_TOKEN }}
