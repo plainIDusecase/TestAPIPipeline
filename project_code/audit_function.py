@@ -1,27 +1,22 @@
 import requests
 import json
 
-#env2Id = "db1a02b5-d2fa-4014-bccd-8539fce0d988"
-#auth2WsId = "b23c17f7-86d2-4a53-b26d-3c0b4bc52159"
-#Import Policy into Environment2
-def check_completion(env2Id, BEARER_TOKEN, policyCode, authWs2Id):
+def check_completion(env1Id, BEARER_TOKEN):
 
-    url2 = f"https://api.eu1.plainid.io/api/1.0/policies/{env2Id}"
+    url2 = f"https://api.eu1.plainid.io/api/1.0/audit-admin/{env1Id}"
+    params = {
+        "filter[timestamp][gt]":1707800041000,
+        "filter[resourceType][eq]": "ROLE"
     headers = {
         "Authorization": "Bearer " + BEARER_TOKEN,
         "accept": "application/json"
     }
 
-    data = {
-        "policyCode": policyCode,
-        "authWsId": authWs2Id,
-        "language": "rego"
-    }
+    response = requests.get(url2, params = params, headers=headers, verify = False)
 
-    response = requests.post(url2, headers=headers, json = data, verify = False)
+    response_data = json.loads(response.text)
+    resource_ids = set(item["resourceId"] for item in response_data["data"])
+    resource_ids_list = list(resource_ids)
+    return resource_ids_list
 
-    data = response.json()
-
-    policycompleted = data['data']['isPolicyCompleted']
-    #policycompleted = data.get('isPolicyCompleted', False)
-    return policycompleted
+  
