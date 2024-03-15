@@ -26,6 +26,10 @@ jobs:
         run: |
           python3 project_code/DEVflow.py 
 
+      - name: Save code
+        run: |
+          python3 project_code/DEVflow.py > policyCode.txt
+          
       - name: Commit and push changes
         run: |
           git config --global user.email "actions@github.com"
