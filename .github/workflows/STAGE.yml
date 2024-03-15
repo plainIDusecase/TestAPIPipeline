@@ -2,7 +2,7 @@ name: Process DEV Artifact
 on:
   push:
     branches:
-      - stage
+      - STAGE
 
 jobs:
   process-artifact:
