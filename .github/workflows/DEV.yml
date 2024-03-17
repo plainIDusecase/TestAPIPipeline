@@ -17,6 +17,11 @@ jobs:
         run: |
           pip install requests
 
+      - name: Check out master branch
+        uses: actions/checkout@v4
+        with:
+          ref: 'master'
+
       # Run DEVflow script if pushed to DEV branch
       - name: Run DEVflow script
         if: github.ref == 'refs/heads/DEV' && github.event_name == 'push'
