@@ -24,10 +24,10 @@ jobs:
           ref: 'master'
 
       # Run DEVflow script if pushed to DEV branch
-      - name: Run DEVflow script
-        if: github.ref == 'refs/heads/DEV' && github.event_name == 'push'
-        run: |
-          python3 project_code/DEVflow.py 
+ #     - name: Run DEVflow script
+ #       if: github.ref == 'refs/heads/DEV' && github.event_name == 'push'
+ #       run: |
+ #         python3 project_code/DEVflow.py 
 
       # Run STAGEflow script if pushed to STAGE branch
       - name: Run STAGEflow script
