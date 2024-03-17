@@ -30,20 +30,14 @@ jobs:
         run: |
           python3 project_code/DEVflow.py > policyCode.txt
           
-      - name: Commit and push changes
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git add policyCode.txt
-          git commit -m "Add policyCode.txt"
-          git push
+      #- name: Commit and push changes
+      #  run: |
+      #    git config --global user.email "actions@github.com"
+      #    git config --global user.name "GitHub Actions"
+      #    git add policyCode.txt
+      #    git commit -m "Add policyCode.txt"
+      #    git push
           
-      # Upload the output file as an artifact
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: DEV-output
-          path: DEVout.txt
 
       # Conditionally checkout STAGE branch only if pushed to STAGE
       - name: Check out STAGE branch
@@ -51,19 +45,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: 'STAGE'
-
-      # Download the artifact containing the output file if STAGE branch
-      - name: Download Artifact
-        if: github.ref == 'refs/heads/STAGE' && github.event_name == 'push'
-        uses: actions/download-artifact@v2
-        with:
-          name: DEV-output
-          path: output
-
-      # Print the contents of the output file if STAGE branch
-      - name: Print Output
-        if: github.ref == 'refs/heads/STAGE' && github.event_name == 'push'
-        run: cat output/DEVout.txt
 
       - name: Run STAGEflow script
         run: |
