@@ -17,6 +17,7 @@ jobs:
         run: |
           pip install requests
 
+      # Check out master branch
       - name: Check out master branch
         uses: actions/checkout@v4
         with:
@@ -29,25 +30,7 @@ jobs:
           python3 project_code/DEVflow.py 
           python3 project_code/DEVflow.py > policyCode.txt
 
-      # Conditionally checkout master branch only if pushed to DEV branch
-      - name: Check out master branch
-        if: github.ref == 'refs/heads/DEV' && github.event_name == 'push'
-        uses: actions/checkout@v4
-        with:
-          ref: 'master'
-
       # Run STAGEflow script if pushed to STAGE branch
-      - name: Check out STAGE branch
-        if: github.ref == 'refs/heads/STAGE' && github.event_name == 'push'
-        uses: actions/checkout@v4
-        with:
-          ref: 'STAGE'
-
-      - name: Check out master branch
-        uses: actions/checkout@v4
-        with:
-          ref: 'master'
-
       - name: Run STAGEflow script
         if: github.ref == 'refs/heads/STAGE' && github.event_name == 'push'
         run: |
