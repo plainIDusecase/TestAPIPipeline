@@ -43,6 +43,11 @@ jobs:
         with:
           ref: 'STAGE'
 
+      - name: Check out master branch
+        uses: actions/checkout@v4
+        with:
+          ref: 'master'
+
       - name: Run STAGEflow script
         if: github.ref == 'refs/heads/STAGE' && github.event_name == 'push'
         run: |
