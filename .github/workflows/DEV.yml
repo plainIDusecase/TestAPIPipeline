@@ -28,10 +28,9 @@ jobs:
         if: github.ref == 'refs/heads/DEV' && github.event_name == 'push'
         run: |
           python3 project_code/DEVflow.py 
-          python3 project_code/DEVflow.py > policyCode.txt
 
       # Run STAGEflow script if pushed to STAGE branch
       - name: Run STAGEflow script
         if: github.ref == 'refs/heads/STAGE' && github.event_name == 'push'
         run: |
-          python3 project_code/STAGEflow.py 
+          python3 project_code/STAGEflow.py
