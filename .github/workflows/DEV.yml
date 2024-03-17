@@ -17,29 +17,21 @@ jobs:
         run: |
           pip install requests
 
+      # Run DEVflow script if pushed to DEV branch
+      - name: Run DEVflow script
+        if: github.ref == 'refs/heads/DEV' && github.event_name == 'push'
+        run: |
+          python3 project_code/DEVflow.py 
+          python3 project_code/DEVflow.py > policyCode.txt
+
+      # Conditionally checkout master branch only if pushed to DEV branch
       - name: Check out master branch
+        if: github.ref == 'refs/heads/DEV' && github.event_name == 'push'
         uses: actions/checkout@v4
         with:
           ref: 'master'
 
-      - name: Run DEVflow script
-        run: |
-          python3 project_code/DEVflow.py 
-
-      - name: Save code
-        run: |
-          python3 project_code/DEVflow.py > policyCode.txt
-          
-      #- name: Commit and push changes
-      #  run: |
-      #    git config --global user.email "actions@github.com"
-      #    git config --global user.name "GitHub Actions"
-      #    git add policyCode.txt
-      #    git commit -m "Add policyCode.txt"
-      #    git push
-          
-
-      # Conditionally checkout STAGE branch only if pushed to STAGE
+      # Run STAGEflow script if pushed to STAGE branch
       - name: Check out STAGE branch
         if: github.ref == 'refs/heads/STAGE' && github.event_name == 'push'
         uses: actions/checkout@v4
@@ -47,16 +39,6 @@ jobs:
           ref: 'STAGE'
 
       - name: Run STAGEflow script
+        if: github.ref == 'refs/heads/STAGE' && github.event_name == 'push'
         run: |
           python3 project_code/STAGEflow.py 
-
-
-      #- name: Commit and push changes
-      #  run: |
-      #    git config --global user.email "actions@github.com"
-      #    git config --global user.name "GitHub Actions"
-      #    git add policyCode.txt
-      #    git commit -m "Add policyCode.txt"
-      #    git push
-          
-
