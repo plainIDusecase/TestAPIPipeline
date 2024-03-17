@@ -6,8 +6,9 @@ on:
       - STAGE
 
 jobs:
-  save-output:
+  save-output-dev:
     runs-on: ubuntu-latest
+    needs: []
 
     steps:
       - name: Check out repository code
@@ -17,20 +18,34 @@ jobs:
         run: |
           pip install requests
 
-      # Check out master branch
       - name: Check out master branch
         uses: actions/checkout@v4
         with:
           ref: 'master'
 
       # Run DEVflow script if pushed to DEV branch
- #     - name: Run DEVflow script
- #       if: github.ref == 'refs/heads/DEV' && github.event_name == 'push'
- #       run: |
- #         python3 project_code/DEVflow.py 
+      - name: Run DEVflow script
+        if: github.ref == 'refs/heads/DEV' && github.event_name == 'push'
+        run: |
+          python3 project_code/DEVflow.py 
+          python3 project_code/DEVflow.py > policyCode.txt
+
+  save-output-stage:
+    runs-on: ubuntu-latest
+    needs: save-output-dev
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      # Check out master branch
+      - name: Check out master branch
+        uses: actions/checkout@v4
+        with:
+          ref: 'master'
 
       # Run STAGEflow script if pushed to STAGE branch
       - name: Run STAGEflow script
         if: github.ref == 'refs/heads/STAGE' && github.event_name == 'push'
         run: |
-          python3 project_code/STAGEflow.py
+          python3 project_code/STAGEflow.py 
