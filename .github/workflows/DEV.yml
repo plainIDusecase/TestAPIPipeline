@@ -4,6 +4,7 @@ on:
     branches:
       - DEV
       - STAGE
+      - PROD
 
 jobs:
   save-output:
@@ -54,3 +55,24 @@ jobs:
       #    git add policyCode.txt
       #    git commit -m "Add policyCode.txt"
       #    git push
+
+            # Conditionally checkout PROD branch only if pushed to PROD
+      - name: Check out PROD branch
+        if: github.ref == 'refs/heads/PROD' && github.event_name == 'push'
+        uses: actions/checkout@v4
+        with:
+          ref: 'PROD'
+
+      - name: Run PRODflow script
+        run: |
+          python3 project_code/PRODflow.py 
+
+
+      #- name: Commit and push changes
+      #  run: |
+      #    git config --global user.email "actions@github.com"
+      #    git config --global user.name "GitHub Actions"
+      #    git add policyCode.txt
+      #    git commit -m "Add policyCode.txt"
+      #    git push
+
