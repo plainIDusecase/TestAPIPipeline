@@ -7,7 +7,7 @@ from import_function import check_completion
 from DEVflow import get_policy_codes
 
 
-def import_to_stage()
+def import_to_stage():
     clientId = "POOGAATPV9DWOHZDYGMT"
     clientSecret = "tasoUG8Ls2b3P8n17Yzh9V4PHmd97DyZ"
     BEARER_TOKEN = get_token(clientId, clientSecret)
