@@ -6,6 +6,10 @@ from validate_function import check_pass
 from import_function import check_completion
 from audit_function import do_audit
 #from gitup import push_to_github
+import os
+
+my_secret = os.environ['TEST']
+print("My secret:", my_secret)
 
 def get_policy_codes():
   clientId = "POOGAATPV9DWOHZDYGMT"  
