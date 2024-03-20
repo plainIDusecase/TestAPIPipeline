@@ -23,5 +23,5 @@ jobs:
 
       - name: Run Python Script
         env:
-          MY_SECRET: ${{ secrets.MY_SECRET }}
+          MY_SECRET: ${{ secrets.TEST }}
         run: python project_code/DEVflow.py
