@@ -25,3 +25,11 @@ jobs:
         env:
           TEST: ${{ secrets.TEST }}
         run: python project_code/DEVflow.py
+
+      - name: Commit Output to Another Branch
+        run: |
+          git checkout -b DEV
+          echo "Output: $OUTPUT" > output.txt
+          git add output.txt
+          git commit -m "Add output.txt"
+          git push origin DEV
