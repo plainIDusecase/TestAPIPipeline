@@ -38,6 +38,7 @@ jobs:
           git add output.txt
           git commit -m "Add output.txt"
           git pull origin Test
+          git merge -s ours origin/Test
           git push https://github.com/plainIDusecase/TestAPIPipeline.git HEAD:Test
         env:
           USERNAME: ${{ secrets.plainIDusecase }}
