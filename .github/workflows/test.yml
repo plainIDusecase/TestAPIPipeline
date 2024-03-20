@@ -12,7 +12,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
+        
+      - name: Set Git Identity
+        run: |
+          git config --global user.email "grace.poole@wipro.com"
+          git config --global user.name "plainIDusecase"
+          
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
