@@ -37,4 +37,7 @@ jobs:
           echo "Output: $OUTPUT" > output.txt
           git add output.txt
           git commit -m "Add output.txt"
-          git push origin DEV
+          git push https://github.com/plainIDusecase/TestAPIPipeline.git HEAD:DEV
+        env:
+          USERNAME: ${{ secrets.plainIDusecase }}
+          TOKEN: ${{ secrets.PAT }}
