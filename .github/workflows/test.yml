@@ -33,12 +33,12 @@ jobs:
 
       - name: Commit Output to Another Branch
         run: |
-          git checkout -b DEV
+          git checkout -b Test
           echo "Output: $OUTPUT" > output.txt
           git add output.txt
           git commit -m "Add output.txt"
-          git pull origin DEV
-          git push https://github.com/plainIDusecase/TestAPIPipeline.git HEAD:DEV
+          git pull origin Test
+          git push https://github.com/plainIDusecase/TestAPIPipeline.git HEAD:Test
         env:
           USERNAME: ${{ secrets.plainIDusecase }}
           TOKEN: ${{ secrets.PAT }}
