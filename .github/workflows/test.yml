@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-
 jobs:
   my_job:
     runs-on: ubuntu-latest
@@ -38,10 +37,8 @@ jobs:
           git add output.txt
           git commit -m "Add output.txt"
           git pull origin Test --rebase  # Pull with rebase to handle divergence
-          git rebase --skip
+          git rebase --skip  # Skip the rebase since we only want to push the new commit
           git push origin Test
-
-
         env:
           USERNAME: ${{ secrets.plainIDusecase }}
           TOKEN: ${{ secrets.PAT }}
