@@ -38,7 +38,10 @@ jobs:
           git add output.txt
           git commit -m "Add output.txt"
           git pull origin Test --rebase  # Pull with rebase to handle divergence
+          git rebase --skip
           git push origin Test
+
+
         env:
           USERNAME: ${{ secrets.plainIDusecase }}
           TOKEN: ${{ secrets.PAT }}
