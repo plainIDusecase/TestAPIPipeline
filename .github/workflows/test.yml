@@ -29,10 +29,14 @@ jobs:
         env:
           TEST: ${{ secrets.TEST }}
         run: python project_code/DEVflow.py
-
+        
+      - name: Check out master branch
+        uses: actions/checkout@v4
+        with:
+          ref: 'Test'
+          
       - name: Commit Output to Another Branch
         run: |
-          git checkout Test
           git reset --hard origin/Test  # Reset the Test branch to its state before the conflict
           echo "Output: $OUTPUT" > output.txt
           git add output.txt
